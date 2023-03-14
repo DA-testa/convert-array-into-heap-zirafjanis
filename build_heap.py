@@ -40,11 +40,11 @@ def heap_sort(data):
 
 def main():
     # Read input from either keyboard or file
-    if len(sys.argv) == 1 or sys.argv[1] == 'I':
+    if len(sys.argv) == 1 or sys.argv[1].strip() == 'I':
         n = int(input())
         data = list(map(int, input().split()))
     else:
-        filename = sys.argv[1]
+        filename = sys.argv[1].strip()
         with open(filename, 'r') as f:
             n = int(f.readline())
             data = list(map(int, f.readline().split()))
@@ -54,9 +54,15 @@ def main():
 
     # Perform heap sort and count the number of swaps
     swaps = heap_sort(data)
+
+    # Check if the number of swaps is less than 4*n
+    assert len(swaps) <= 4*n
+
+    # Output the number of swaps and the swap operations
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+
 
 if __name__ == "__main__":
     main()
