@@ -25,7 +25,6 @@ def sift_down(data, i, swaps):
 
     
 
-
 def main():
     # input from keyboard
     n = int(input())
@@ -37,6 +36,14 @@ def main():
     # add input for I or F
     sort_type = input("Enter sort type (I for increasing, F for decreasing): ")
     assert sort_type in ["I", "F"]
+
+    # If sort type is F, prompt user for the filename
+    if sort_type == "F":
+        filename = input("Enter filename: ")
+        with open(filename, "r") as f:
+            data = list(map(int, f.readline().split()))
+            n = len(data)
+            assert n == int(f.readline().strip())
 
     # convert data to min-heap using O(n) swaps
     swaps = build_heap(data)
@@ -54,6 +61,7 @@ def main():
     else:
         sorted_data = heap_sort(data, reverse=True)
     print(*sorted_data)
+
 
 def heap_sort(data, reverse=False):
     n = len(data)
