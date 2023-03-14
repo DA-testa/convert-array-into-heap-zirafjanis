@@ -16,7 +16,7 @@ def main():
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
 
-
+FSDF
     # input from keyboard
     n = int(input())
     data = list(map(int, input().split()))
