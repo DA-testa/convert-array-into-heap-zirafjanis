@@ -29,7 +29,8 @@ def main():
         n = int(input().strip())
         data = list(map(int, input().strip().split()))
     elif input_type == "F":
-        with open("data/04", "r") as file:
+        with open('/path/to/data/04', 'r') as file:
+    # Read input from the file
             n = int(file.readline().strip())
             data = list(map(int, file.readline().strip().split()))
     else:
