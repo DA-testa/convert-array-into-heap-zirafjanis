@@ -25,8 +25,18 @@ def build_heap(data):
 
 
 def main():
-    n = int(input())
-    data = list(map(int, input().split()))
+    input_type = input("Enter 'I' to enter input manually or 'F' to read from file: ")
+    if input_type == "I":
+        n = int(input())
+        data = list(map(int, input().split()))
+    elif input_type == "F":
+        filename = input("Enter the filename: ")
+        with open(filename, "r") as f:
+            n = int(f.readline())
+            data = list(map(int, f.readline().split()))
+    else:
+        print("Invalid input type. Please enter 'I' or 'F'.")
+        return
 
     assert len(data) == n
 
@@ -35,6 +45,7 @@ def main():
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+
 
 
 if __name__ == "__main__":
