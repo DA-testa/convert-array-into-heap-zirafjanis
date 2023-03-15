@@ -25,7 +25,7 @@ def build_heap(data):
 
 
 def main():
-    input_type = input("Enter I to input from keyboard or F to read from file: ")
+    input_type = input("")
     if input_type == "F":
         filename = input("Enter filename: ")
         with open(filename, "r") as f:
