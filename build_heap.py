@@ -28,7 +28,7 @@ def main():
     elif input_type == "F":
         with open("input.txt", "r") as file:
             n = int(file.readline().strip()) # read the number of elements from the file
-            data = list(map(int, file.readline().strip().split()))
+        data = list(map(int, file.readline().strip().split()))
 
     else:
         print("Invalid input type. Please enter either 'I' or 'F'.")
