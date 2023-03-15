@@ -1,41 +1,44 @@
 def build_heap(data):
     swaps = []
-    n = len(data)
-
-    # Starting from the last non-leaf node and going up to the root
-    # perform sift down operation to convert the array into a min-heap
-    for i in range(n // 2, -1, -1):
+    
+    # The following function sifts down the element at index i to its correct position
+    # to make sure that the subtree rooted at i is a heap.
+    def sift_down(i):
+        # We initialize min_index with i, which is the root of the subtree.
         min_index = i
+        # We compare the left child of i with min_index and update min_index accordingly.
         left_child = 2 * i + 1
-        right_child = 2 * i + 2
-
-        if left_child < n and data[left_child] < data[min_index]:
+        if left_child < len(data) and data[left_child] < data[min_index]:
             min_index = left_child
-
-        if right_child < n and data[right_child] < data[min_index]:
+        # We compare the right child of i with min_index and update min_index accordingly.
+        right_child = 2 * i + 2
+        if right_child < len(data) and data[right_child] < data[min_index]:
             min_index = right_child
-
+        # If i is not the minimum element among i and its children, we swap them and continue
+        # sifting down the element at min_index.
         if i != min_index:
-            # swap the current element with the minimum of its children
-            data[i], data[min_index] = data[min_index], data[i]
             swaps.append((i, min_index))
-            swaps += build_heap(data[min_index:])
+            data[i], data[min_index] = data[min_index], data[i]
+            sift_down(min_index)
+    
+    # We start sifting down elements from the bottom of the heap up to the root.
+    for i in range(len(data) // 2, -1, -1):
+        sift_down(i)
 
     return swaps
 
 
 def main():
-    input_type = input("Enter 'I' to enter input manually or 'F' to read from file: ")
-    if input_type == "I":
+    input_type = input("Enter I to input from keyboard or F to read from file: ")
+    if input_type == 'I':
         n = int(input())
         data = list(map(int, input().split()))
-    elif input_type == "F":
-        filename = input("Enter the filename: ")
-        with open(filename, "r") as f:
+    elif input_type == 'F':
+        with open('input.txt') as f:
             n = int(f.readline())
             data = list(map(int, f.readline().split()))
     else:
-        print("Invalid input type. Please enter 'I' or 'F'.")
+        print("Invalid input type. Please enter either 'I' or 'F'.")
         return
 
     assert len(data) == n
@@ -47,7 +50,5 @@ def main():
         print(i, j)
 
 
-
 if __name__ == "__main__":
     main()
-
