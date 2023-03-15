@@ -1,42 +1,37 @@
-import sys
-
-
 def build_heap(data):
     swaps = []
     n = len(data)
-
-    def sift_down(i):
-        min_index = i
-        left_child = 2 * i + 1
-        if left_child < n and data[left_child] < data[min_index]:
-            min_index = left_child
-        right_child = 2 * i + 2
-        if right_child < n and data[right_child] < data[min_index]:
-            min_index = right_child
-        if i != min_index:
-            data[i], data[min_index] = data[min_index], data[i]
-            swaps.append((i, min_index))
-            sift_down(min_index)
-
-    for i in range(n // 2, -1, -1):
-        sift_down(i)
-
+    for i in range(n//2, -1, -1):
+        sift_down(i, data, swaps)
     return swaps
 
+def sift_down(i, data, swaps):
+    n = len(data)
+    min_index = i
+    l = 2*i + 1
+    if l < n and data[l] < data[min_index]:
+        min_index = l
+    r = 2*i + 2
+    if r < n and data[r] < data[min_index]:
+        min_index = r
+    if i != min_index:
+        swaps.append((i, min_index))
+        data[i], data[min_index] = data[min_index], data[i]
+        sift_down(min_index, data, swaps)
 
 def main():
-    input_type = input("Please enter either 'I' or 'F'")
-    if input_type == "F":
-        filename = input("Enter filename: ")
-        with open(filename, "r") as f:
-            n = int(f.readline())
-            data = list(map(int, f.readline().split()))
-    elif input_type == "I":
+    input_type = input("Enter I to input from keyboard or F to read from file: ")
+    
+    if input_type == "I":
         n = int(input())
         data = list(map(int, input().split()))
+    elif input_type == "F":
+        with open("input.txt", "r") as file:
+            n = int(file.readline())
+            data = list(map(int, file.readline().split()))
     else:
         print("Invalid input type. Please enter either 'I' or 'F'.")
-        sys.exit()
+        return
 
     assert len(data) == n
 
@@ -45,7 +40,6 @@ def main():
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
-
 
 if __name__ == "__main__":
     main()
