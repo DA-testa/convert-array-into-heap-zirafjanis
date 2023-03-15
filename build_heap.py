@@ -1,6 +1,3 @@
-import os
-print(os.getcwd())
-
 def build_heap(data):
     swaps = []
     n = len(data)
@@ -29,8 +26,7 @@ def main():
         n = int(input().strip())
         data = list(map(int, input().strip().split()))
     elif input_type == "F":
-        with open('/path/to/data/04', 'r') as file:
-    # Read input from the file
+        with open("input.txt", "r") as file:
             n = int(file.readline().strip())
             data = list(map(int, file.readline().strip().split()))
     else:
