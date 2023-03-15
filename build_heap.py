@@ -20,29 +20,27 @@ def sift_down(i, data, swaps):
         sift_down(min_index, data, swaps)
 
 def main():
-    input_type = input("Enter I to input from keyboard or F to read from file: ")
+    input_type = input().strip()
     
     if input_type == "I":
-        n = int(input())
-        data = list(map(int, input().split()))
+        n = int(input().strip())
+        data = list(map(int, input().strip().split()))
     elif input_type == "F":
         with open("input.txt", "r") as file:
-            n = int(file.readline())
-            data = list(map(int, file.readline().split()))
+            n = int(file.readline().strip())
+            data = list(map(int, file.readline().strip().split()))
     else:
         print("Invalid input type. Please enter either 'I' or 'F'.")
         return
-    print(input_type)
-    print(data)
-
-
+    
     assert len(data) == n
-
+    
     swaps = build_heap(data)
-
+    
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+
 
 if __name__ == "__main__":
     main()
