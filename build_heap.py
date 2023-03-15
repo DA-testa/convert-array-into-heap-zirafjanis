@@ -25,7 +25,7 @@ def build_heap(data):
 
 
 def main():
-    input_type = input("")
+    input_type = input("Please enter either 'I' or 'F'")
     if input_type == "F":
         filename = input("Enter filename: ")
         with open(filename, "r") as f:
