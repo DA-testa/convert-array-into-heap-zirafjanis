@@ -32,6 +32,9 @@ def main():
     else:
         print("Invalid input type. Please enter either 'I' or 'F'.")
         return
+    print(input_type)
+    print(data)
+
 
     assert len(data) == n
 
