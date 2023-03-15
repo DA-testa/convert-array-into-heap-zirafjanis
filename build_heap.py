@@ -1,68 +1,41 @@
-import sys
-
 def build_heap(data):
-    n = len(data)
     swaps = []
+    n = len(data)
     for i in range(n//2, -1, -1):
-        swaps += sift_down(data, i, n)
+        sift_down(i, data, swaps)
     return swaps
 
-def sift_down(data, i, n):
-    swaps = []
-    max_idx = i
-    l = 2*i + 1
-    if l < n and data[l] > data[max_idx]:
-        max_idx = l
-    r = 2*i + 2
-    if r < n and data[r] > data[max_idx]:
-        max_idx = r
-    if i != max_idx:
-        swaps.append((i, max_idx))
-        data[i], data[max_idx] = data[max_idx], data[i]
-        swaps += sift_down(data, max_idx, n)
-    return swaps
-
-
-def heap_sort(data):
-    swaps = []
+def sift_down(i, data, swaps):
     n = len(data)
-
-    # Build the heap in O(n) time complexity
-    build_heap(data)
-
-    # Perform heap sort by removing the root element and re-heapifying
-    for i in range(n-1, 0, -1):
-        swaps.append((0, i))
-        data[0], data[i] = data[i], data[0]
-        sift_down(data[:i], 0, swaps)
-
-    return swaps
+    while 2*i+1 < n:
+        j = 2*i+1
+        if j+1 < n and data[j+1] < data[j]:
+            j = j+1
+        if data[i] > data[j]:
+            swaps.append((i, j))
+            data[i], data[j] = data[j], data[i]
+            i = j
+        else:
+            break
 
 def main():
-    # Read input from either keyboard or file
-    if len(sys.argv) == 1 or sys.argv[1].strip() == 'I':
-        n = int(input())
-        data = list(map(int, input().split()))
-    else:
-        filename = sys.argv[1].strip()
-        with open(filename, 'r') as f:
-            n = int(f.readline())
-            data = list(map(int, f.readline().split()))
+    # input from keyboard
+    n = int(input())
+    data = list(map(int, input().split()))
 
-    # Check if the length of data is the same as the given length
+    # checks if length of data is the same as the said length
     assert len(data) == n
 
-    # Perform heap sort and count the number of swaps
-    swaps = heap_sort(data)
+    # calls function to assess the data 
+    # and give back all swaps
+    swaps = build_heap(data)
 
-    # Check if the number of swaps is less than 4*n
-    assert len(swaps) <= 4*n
-
-    # Output the number of swaps and the swap operations
+    # output how many swaps were made
     print(len(swaps))
+
+    # output all swaps
     for i, j in swaps:
         print(i, j)
-
 
 if __name__ == "__main__":
     main()
