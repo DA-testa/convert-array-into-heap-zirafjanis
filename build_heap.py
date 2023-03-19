@@ -22,26 +22,35 @@ def sift_down(i, data, swaps):
         sift_down(min_index, data, swaps)
 
 def main():
-    input_type = input().strip()
-    
-    if input_type == "I":
-        n = int(input().strip())
-        data = list(map(int, input().strip().split()))
-    elif input_type == "F":
-        file_path = os.path.join("04")
-        with open(file_path, "r") as file:
+    option = input("Enter input type: ")
+    data = []
 
-            n = int(file.readline().strip()) 
-            data = list(map(int, file.readline().strip().split()))
-
+    if "F" in option:
+        # input from file
+        try:
+            file_path = input("Input file path: ")
+            with open(f"tests/{file_path}", "r") as file:
+                n = int(file.readline().strip())
+                data = list(map(int, file.readline().strip().split()))
+        except FileNotFoundError:
+            print("File not found.")
+            return
+    elif "I" in option:
+        # input from keyboard
+        try:
+            n = int(input())
+            data = list(map(int, input().split()))
+        except ValueError:
+            print("Invalid input format.")
+            return
     else:
-        print("Invalid input type. Please enter either 'I' or 'F'.")
+        print("Invalid input type.")
         return
-    
+
     assert len(data) == n
-    
+
     swaps = build_heap(data)
-    
+
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
