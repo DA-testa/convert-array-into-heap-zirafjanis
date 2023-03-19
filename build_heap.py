@@ -1,3 +1,5 @@
+import os
+
 def build_heap(data):
     swaps = []
     n = len(data)
@@ -26,7 +28,8 @@ def main():
         n = int(input().strip())
         data = list(map(int, input().strip().split()))
     elif input_type == "F":
-        with open("convert-array-into-heap-zirafjanis\tests\04", "r") as file:
+        file_path = os.path.join("convert-array-into-heap-zirafjanis", "tests", "04")
+        with open(file_path, "r") as file:
 
             n = int(file.readline().strip()) 
             data = list(map(int, file.readline().strip().split()))
