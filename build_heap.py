@@ -28,7 +28,7 @@ def main():
     elif input_type == "F":
         with open("convert-array-into-heap-zirafjanis\tests\04", "r") as file:
 
-            n = int(file.readline().strip()) # read the number of elements from the file
+            n = int(file.readline().strip()) 
             data = list(map(int, file.readline().strip().split()))
 
     else:
