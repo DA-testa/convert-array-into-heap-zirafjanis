@@ -28,7 +28,7 @@ def main():
         n = int(input().strip())
         data = list(map(int, input().strip().split()))
     elif input_type == "F":
-        file_path = os.path.join("convert-array-into-heap-zirafjanis", "tests", "04")
+        file_path = os.path.join("04")
         with open(file_path, "r") as file:
 
             n = int(file.readline().strip()) 
